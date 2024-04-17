@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data display</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        .tbl,tr,td,th{
+            border: 1px solid black;
+            border-collapse: collapse ;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            padding: 10px;
+        }
+        .center{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }  
+        .h1{
+            text-align: center;
+        }  
+        
+/*css of pagination */
+        .container,.button,.links,.link{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+        .container{
+                    padding: 10px;
+                    border-radius: 8px;
+                    column-gap: 12px;
+                    background-color: #fff;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1)
+        }
+        button{
+            border: none;
+        }
+        button,.link{
+            height: 30px;
+            width: 30px;
+            font-size: 20px;
+            color: #666666;
+            background-color: #f2f2f2;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .links{
+            column-gap: 12px;
+        }
+        .link{
+            text-decoration: none;
+        }
+        button:hover,.link:hover{
+            color: #fff;
+            background-color: #4070f4;
+        }
+        .link.active{
+            color: #fff;
+            background-color: #4070f4;
+            width: 80px;
+        }
+        a{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 class="h1">data display with sparrow</h1>
+    <div class="center">
+        <table class="tbl">
+            <thead>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>DOB</th>
+                <th>E-mail</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Pincode</th>
+                <th>Department</th>
+                <th>Semester</th>
+            </thead>
+            <% data.forEach(i =>{ %>
+                <tbody>
+                    <tr>
+                        <td><%= i.id %></td>
+                        <td><%= i.fname %></td>
+                        <td><%= i.lname %></td>
+                        <td><%= i.gender %></td>
+                        <td><%= i.dob %></td>
+                        <td><%= i.email %></td>
+                        <td><%= i.address %></td>
+                        <td><%= i.city %></td>
+                        <td><%= i.pincode %></td>
+                        <td><%= i.department %></td>
+                        <td><%= i.sem %></td>
+                    </tr>
+                </tbody>
+            <% }) %>
+        </table>
+    </div>
+    <div class="container">
+        <% if (page > 1) { %>
+        <a href="/?page=<%= parseInt(page) - 1 %>"><button class="button" id="front" ><i class="fas fa-angle-double-left"></i></button></a>
+        <% } %>
+        
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <% if (i == page) { %>
+                <span class="link"><%= i %></span>
+            <% } else { %>
+                <a href="/?page=<%= i %>"><%= i %></a>
+            <% } %>
+        <% } %>
+        
+        <% if (page < totalPages) { %>
+        <a href="/?page=<%= parseInt(page) + 1 %>"><button class="button" ><i class="fas fa-angle-double-right"></i></button></a>
+        <% } %>
+        
+    </div>
+    
+</body>
+</html>
